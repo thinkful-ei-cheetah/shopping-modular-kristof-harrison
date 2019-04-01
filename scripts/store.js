@@ -45,6 +45,14 @@ const store = ( function (){
     this.items =  this.items.filter(item => item.id !== id);
   }
 
+  function toggleCheckedFilter(){
+    this.hideCheckedItems = !this.hideCheckedItems;
+  }
+
+  function setSearchTerm(value){
+    this.searchTerm = value;
+  }
+
   return{
     items,
     hideCheckedItems,
@@ -54,5 +62,7 @@ const store = ( function (){
     findAndToggleChecked,
     findById,
     findAndUpdateName,
+    toggleCheckedFilter,
+    setSearchTerm,
   };
 }() );
