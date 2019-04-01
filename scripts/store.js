@@ -42,7 +42,7 @@ const store = ( function (){
   }
 
   function findAndDelete (id){
-    return this.items.filter(item => item.id !== id);
+    this.items =  this.items.filter(item => item.id !== id);
   }
 
   return{
