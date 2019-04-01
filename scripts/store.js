@@ -1,5 +1,5 @@
 'use strict';
-/*global cuid*/
+/*global cuid Item*/
 
 
 const store = ( function (){
@@ -12,9 +12,47 @@ const store = ( function (){
   let hideCheckedItems= false;
   let searchTerm= '';
 
+  function findById(id){
+    return this.items.find(item => item.id === id);
+  }
+
+
+  function addItem (name){
+    try{
+      Item.validateName(name);
+      this.items.push(Item.create(name));
+    } catch (e){
+      console.error(e.message);
+    }
+  }
+
+  function findAndToggleChecked(id) {
+    const item = this.findById(id);
+    item.checked = !item.checked;
+  }
+
+  function findAndUpdateName(id, newName){
+    try{
+      Item.validateName(newName);
+      const item = this.findById(id);
+      item.name = newName;
+    } catch (e){
+      console.error(e.message);
+    }
+  }
+
+  function findAndDelete (id){
+    return this.items.filter(item => item.id !== id);
+  }
+
   return{
     items,
     hideCheckedItems,
     searchTerm,
+    findAndDelete,
+    addItem,
+    findAndToggleChecked,
+    findById,
+    findAndUpdateName,
   };
 }() );
